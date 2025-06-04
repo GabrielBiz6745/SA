@@ -37,11 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmtSessao->bind_param('is', $user['id'], $token);
             $stmtSessao->execute();
 
-            echo json_encode([
-                'sucesso' => true,
-                'token' => $token,
-                'primeiro_login' => $user['primeiro_login']
-            ]);
+            header('Location: inicial.php');
+            exit;
+
         } else {
             echo json_encode(['erro' => 'Senha incorreta.']);
         }
@@ -83,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="info-box">
         <form method="post">
-            <p><input type='text' name='login' placeholder="Login" required></p>
-            <p><input type='password' name='password' placeholder="Senha" required></p>
+            <p><input type='text' name='email' placeholder="email" required></p>
+            <p><input type='password' name='senha' placeholder="senha" required></p>
             <p><button type='submit'>Logar</button></p>
         </form>
     </div>
