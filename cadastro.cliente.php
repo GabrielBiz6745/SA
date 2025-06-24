@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'conexaoSA.php';
+// Conexão com o banco de dados
+$conn = new mysqli('localhost', 'usuario', 'senha', 'crm');
 
 // Verificar se a conexão foi bem-sucedida
 if ($conn->connect_error) {
