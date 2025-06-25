@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="post">
             <p><input type='text' name='email' placeholder="email" required></p>
             <p><input type='password' name='senha' placeholder="senha" required></p>
-            <p><button type='submit'>Logar</button></p>
+            <p><button type='submit'>Fazer login</button></p>
         </form>
     </div>
 
