@@ -10,9 +10,9 @@ $usuario_id_logado = 1; // O ID do usuário logado, você precisa configurar iss
 
 if (empty($_GET['id'])) {
     $id_cliente = $_GET['id'];
-$sql = "SELECT * FROM clientes WHERE id = $id_cliente";
-$result = $conn->query($sql);
-$cliente = $result->fetch_assoc();
+    $sql = "SELECT * FROM clientes WHERE id = $id_cliente";
+    $result = $conn->query($sql);
+    $cliente = $result->fetch_assoc();
 }
 // Verificar se o cliente existe e se é do usuário logado
 if ($cliente['usuario_id'] != $usuario_id_logado) {
@@ -22,7 +22,7 @@ if ($cliente['usuario_id'] != $usuario_id_logado) {
 // Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['id'])) {
-        
+
         // Se não houver ID, é um novo cadastro
         $nome = $_POST['nome'];
         $email = $_POST['email'];
@@ -70,6 +70,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,6 +78,7 @@ $conn->close();
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
@@ -135,4 +137,5 @@ $conn->close();
         });
     </script>
 </body>
+
 </html>

@@ -2,15 +2,19 @@
 session_start();
 require_once 'conexaoSA.php';
 
-// Verificação básica se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
+//if (!isset($_SESSION['usuario'])) {
+//    header("Location: login.php");
+//    exit();
+//}
+
+// Consulta todos os clientes
+//$sql = "SELECT nome, email, telefone, cep, endereco, data_criacao FROM clientes ORDER BY data_criacao DESC";
+//$resultado = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Tela Inicial</title>
@@ -21,21 +25,31 @@ if (!isset($_SESSION['usuario'])) {
             background-color: rgb(87, 87, 87);
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start;
+            padding: 40px;
         }
 
         .container {
             background-color: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 300px;
-            text-align: center;
+            margin-right: 40px;
+        }
+
+        .lista-clientes {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            overflow-y: auto;
+            max-height: 80vh;
         }
 
         h2 {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #333;
         }
 
@@ -69,29 +83,88 @@ if (!isset($_SESSION['usuario'])) {
         .logout a:hover {
             text-decoration: underline;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</h2>
+    <div class="container">
+        <h2>Bem-vindo, Cane!</h2>
 
-    <form action="cadastrarCliente.php" method="get">
-        <button type="submit">Cadastrar Cliente</button>
-    </form>
+        <form action="cadastro.php" method="get">
+            <button type="submit">Cadastrar Cliente</button>
+        </form>
 
-    <form action="editarCliente.php" method="get">
-        <button type="submit">Editar Cliente</button>
-    </form>
+        <form action="editar_cliente.php" method="get">
+            <button type="submit">Editar Cliente</button>
+        </form>
 
-    <form action="excluirCliente.php" method="get">
-        <button type="submit">Excluir Cliente</button>
-    </form>
+        <form action="excluir_cliente.php" method="get">
+            <button type="submit">Excluir Cliente</button>
+        </form>
 
-    <div class="logout">
-        <a href="logout.php">Sair</a>
+        <form class="logout" action="Login.php" method="get">
+            <button type="submit">Sair</button>
+        </form>
     </div>
-</div>
+
+    <div class="lista-clientes">
+        <h2>Clientes Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>CEP</th>
+                    <th>Endereço</th>
+                    <th>Data/Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<?php if ($resultado->num_rows > 0): ?>-->
+
+                <?php while ($row = $resultado->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['nome']); ?></td>
+                        <td><?php echo htmlspecialchars($row['email']); ?></td>
+                        <td><?php echo htmlspecialchars($row['telefone']); ?></td>
+                        <td><?php echo htmlspecialchars($row['cep']); ?></td>
+                        <td><?php echo htmlspecialchars($row['endereco']); ?></td>
+                        <td><?php echo date('d/m/Y H:i', strtotime($row['data_criacao'])); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="6">Nenhum cliente cadastrado.</td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 
 </body>
+
 </html>
