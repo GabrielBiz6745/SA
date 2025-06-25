@@ -22,8 +22,8 @@ if ($cliente['usuario_id'] != $usuario_id_logado) {
 // Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['id'])) {
+        
         // Se não houver ID, é um novo cadastro
-
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $telefone = $_POST['telefone'];

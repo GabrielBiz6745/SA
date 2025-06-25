@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>LOGIN</title>
     <link rel="icon" type="image/x-icon" href="supplies.ico">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color:rgb(87, 87, 87);
             margin: 0;
             padding: 0;
             display: flex;
@@ -132,14 +132,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <div class="info-box">
-        <h2>Login</h2>
+        <h2>LOGIN</h2>
         <?php if (isset($erro) && $erro) { ?>
             <p class="error">Usuário ou senha inválidos</p>
         <?php } ?>
         
         <form method="post">
-            <p><input type='text' name='email' placeholder="email" required></p>
-            <p><input type='password' name='senha' placeholder="senha" required></p>
+            <p><input type='text' name='email' placeholder="EMAIL" required></p>
+            <p><input type='password' name='senha' placeholder="SENHA" required></p>
             <p><button type='submit'>Fazer login</button></p>
         </form>
     </div>
