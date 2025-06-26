@@ -33,6 +33,9 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) NOT NULL,
   `senha_hash` varchar(255) NOT NULL,
   `cep` varchar(10) DEFAULT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `endereco` varchar(255) NOT NULL,
   `ativo` tinyint(1) DEFAULT 1,
   `primeiro_login` tinyint(1) DEFAULT 1,
   `data_criacao` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -44,7 +47,7 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha_hash`, `cep`, `ativo`, `primeiro_login`, `data_criacao`, `perfil_id`, `convidado_por`) VALUES
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha_hash`, `cep`, `telefone`, `cidade`, `endereco`, `ativo`, `primeiro_login`, `data_criacao`, `perfil_id`, `convidado_por`) VALUES
 (1, 'Cane', 'canopvc@gmail.com', '$2y$10$hsWzOEP4jjJPdplc7YBBHesVOq/TEWudJJJTwRQmAtsHly8nDsJiC', '11234567', 1, 1, '2025-06-04 00:08:13', NULL, 0);
 
 --

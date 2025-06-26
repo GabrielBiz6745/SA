@@ -8,8 +8,8 @@ require_once 'conexaoSA.php';
 //}
 
 // Consulta todos os clientes
-//$sql = "SELECT nome, email, telefone, cep, endereco, data_criacao FROM clientes ORDER BY data_criacao DESC";
-//$resultado = $conn->query($sql);
+$sql = "SELECT nome, email, telefone, cep, endereco, data_criacao FROM usuarios ORDER BY data_criacao DESC";
+$resultado = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -158,7 +158,7 @@ require_once 'conexaoSA.php';
                                 <td><?php echo htmlspecialchars($row['cep']); ?></td>
                                 <td><?php echo htmlspecialchars($row['cidade']); ?></td>
                                 <td><?php echo htmlspecialchars($row['endereco']); ?></td>
-                                <td><?php echo date('d/m/Y H:i', strtotime($row['data_cadastro'])); ?></td>
+                                <td><?php echo date('d/m/Y H:i', strtotime($row['data_criacao'])); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
