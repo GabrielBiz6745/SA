@@ -110,61 +110,75 @@ require_once 'conexaoSA.php';
 
 <body>
 
-    <div class="container">
-        <h2>Bem-vindo, Cane!</h2>
+<div style="display: flex; flex-direction: column; gap: 30px;">
+    <div style="display: flex; gap: 40px;">
+        <!-- Painel de ações -->
+        <div class="container">
+            <h2>Bem-vindo, Cane!</h2>
 
-        <form action="cadastro.php" method="get">
-            <button type="submit">Cadastrar Cliente</button>
-        </form>
+            <form action="cadastro.php" method="get">
+                <button type="submit">Cadastrar Cliente</button>
+            </form>
 
-        <form action="editar_cliente.php" method="get">
-            <button type="submit">Editar Cliente</button>
-        </form>
+            <form action="editar_cliente.php" method="get">
+                <button type="submit">Editar Cliente</button>
+            </form>
 
-        <form action="excluir_cliente.php" method="get">
-            <button type="submit">Excluir Cliente</button>
-        </form>
+            <form action="excluir_cliente.php" method="get">
+                <button type="submit">Excluir Cliente</button>
+            </form>
 
-        <form class="logout" action="Login.php" method="get">
-            <button type="submit">Sair</button>
-        </form>
-    </div>
+            <form class="logout" action="Login.php" method="get">
+                <button type="submit">Sair</button>
+            </form>
+        </div>
 
-    <div class="lista-clientes">
-        <h2>Clientes Cadastrados</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>CEP</th>
-                    <th>Endereço</th>
-                    <th>Data/Hora</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--<?php if ($resultado->num_rows > 0): ?>-->
-
-                <?php while ($row = $resultado->fetch_assoc()): ?>
+        <!-- Tabela de clientes -->
+        <div class="lista-clientes">
+            <h2>Clientes Cadastrados</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['nome']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['telefone']); ?></td>
-                        <td><?php echo htmlspecialchars($row['cep']); ?></td>
-                        <td><?php echo htmlspecialchars($row['endereco']); ?></td>
-                        <td><?php echo date('d/m/Y H:i', strtotime($row['data_criacao'])); ?></td>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>CEP</th>
+                        <th>Endereço</th>
+                        <th>Data/Hora</th>
                     </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="6">Nenhum cliente cadastrado.</td>
-                </tr>
-            <?php endif; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php if ($resultado->num_rows > 0): ?>
+                        <?php while ($row = $resultado->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['nome']); ?></td>
+                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                <td><?php echo htmlspecialchars($row['telefone']); ?></td>
+                                <td><?php echo htmlspecialchars($row['cep']); ?></td>
+                                <td><?php echo htmlspecialchars($row['endereco']); ?></td>
+                                <td><?php echo date('d/m/Y H:i', strtotime($row['data_cadastro'])); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6">Nenhum cliente cadastrado.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- Seção de relacionamentos -->
+    <div style="display: flex;">
+        <div class="container" style="width: 300px;">
+            <h2>Relacionamentos</h2>
+            <p style="color: #999;">(Futuro conteúdo aqui)</p>
+        </div>
+    </div>
+</div>
 
 </body>
+
 
 </html>
