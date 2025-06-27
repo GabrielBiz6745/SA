@@ -8,7 +8,7 @@ require_once 'conexaoSA.php';
 //}
 
 // Consulta todos os clientes
-$sql = "SELECT nome, email, telefone, cep, endereco, data_criacao FROM usuarios ORDER BY data_criacao DESC";
+$sql = "SELECT nome, email, telefone, cep, endereco, cidade, data_criacao FROM usuarios ORDER BY data_criacao DESC";
 $resultado = $conn->query($sql);
 ?>
 
