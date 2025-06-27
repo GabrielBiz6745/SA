@@ -2,10 +2,10 @@
 session_start();
 require_once 'conexaoSA.php';
 
-//if (!isset($_SESSION['usuario'])) {
-//    header("Location: login.php");
-//    exit();
-//}
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // Consulta todos os clientes
 $sql = "SELECT nome, email, telefone, cep, endereco, cidade, data_criacao FROM usuarios ORDER BY data_criacao DESC";
@@ -174,7 +174,7 @@ $resultado = $conn->query($sql);
     <!-- Seção de relacionamentos -->
     <div style="display: flex;">
         <div class="container" style="width: 300px;">
-            <h2>Relacionamentos</h2>
+            <h2>Relacionamento</h2>
             <p style="color: #999;">(Futuro conteúdo aqui)</p>
         </div>
     </div>
