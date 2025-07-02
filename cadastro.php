@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Inserção no banco de dados
-        $sql = "INSERT INTO usuarios (nome, email, telefone, cep, endereco, usuario_id) 
+        $sql = "INSERT INTO usuarios (nome, email, telefone, cep, endereco, perfil_id) 
             VALUES ('$nome', '$email', '$telefone', '$cep', '$endereco', $usuario_id)";
 
         if ($conn->query($sql) === TRUE) {
