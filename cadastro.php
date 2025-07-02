@@ -6,11 +6,11 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$usuario_id_logado = 1; // O ID do usuário logado, você precisa configurar isso.
+$usuario_id_logado = $_SESSION['usuario_id']; // O ID do usuário logado, você precisa configurar isso.
 
-if (empty($_GET['id'])) 
+if (empty($_GET['id']))
 
-include 'conexaoSA.php';
+    include 'conexaoSA.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
@@ -30,14 +30,14 @@ if ($id !== null) {
 ?>
 
 <?php
-$sql = "SELECT * FROM clientes WHERE id = $id_cliente";
+$sql = "SELECT * FROM usuarios WHERE id = $usuario_id_logado";
 $result = $conn->query($sql);
 $cliente = $result->fetch_assoc();
 
 // Verificar se o cliente existe e se é do usuário logado
-if ($cliente['usuario_id'] != $usuario_id_logado) {
-    die("Você não tem permissão para editar este cliente!");
-}
+//if ($cliente['perfil_id'] != $usuario_id_logado) {
+//    die("Você não tem permissão para editar este cliente!");
+//}
 
 // Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Inserção no banco de dados
-        $sql = "INSERT INTO clientes (nome, email, telefone, cep, endereco, usuario_id) 
+        $sql = "INSERT INTO usuarios (nome, email, telefone, cep, endereco, usuario_id) 
             VALUES ('$nome', '$email', '$telefone', '$cep', '$endereco', $usuario_id)";
 
         if ($conn->query($sql) === TRUE) {
@@ -67,15 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Erro: " . $conn->error;
         }
     } else {
-        $id_cliente = $_POST['id'];
+        $usuario_id = $_POST['id'];
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $telefone = $_POST['telefone'];
         $cep = $_POST['cep'];
         $endereco = $_POST['endereco'];
 
-        $sql_update = "UPDATE clientes SET nome='$nome', email='$email', telefone='$telefone', 
-                    cep='$cep', endereco='$endereco' WHERE id=$id_cliente";
+        $sql_update = "UPDATE usuarios SET nome='$nome', email='$email', telefone='$telefone', 
+                    cep='$cep', endereco='$endereco' WHERE id=$usuario_id";
 
         if ($conn->query($sql_update) === TRUE) {
             echo "Cliente alterado com sucesso!";
@@ -90,6 +90,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,11 +98,88 @@ $conn->close();
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: rgb(87, 87, 87);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px;
+    }
+
+    .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 400px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            width: 90%;
+            padding: 20px;
+        }
+    }
+</style>
+
 <body>
     <div class="container">
         <div class="form-container">
             <h2>Cadastro de Cliente</h2>
-            <form id="formCadastro" method="POST" action="cadastro.cliente.php">
+            <form id="formCadastro" method="POST" action="cadastro.php">
                 <div class="input-group">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" value="<?= $cliente['nome'] ?>" required><br>
@@ -155,4 +233,5 @@ $conn->close();
         });
     </script>
 </body>
+
 </html>

@@ -175,7 +175,7 @@ $resultado = $conn->query($sql);
     <div style="display: flex;">
         <div class="container" style="width: 300px;">
             <h2>Relacionamento</h2>
-            <p style="color: #999;">(Futuro conteúdo aqui)</p>
+            <p style="color: #999;">(Bryan, Gabriel, Wellinton)</p>
         </div>
     </div>
 </div>
