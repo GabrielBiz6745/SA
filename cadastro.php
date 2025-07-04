@@ -24,8 +24,6 @@ if ($id !== null) {
         echo "Nome: " . $row['nome'] . "<br>";
         echo "Email: " . $row['email'] . "<br>";
     }
-} else {
-    echo "ID não informado!";
 }
 ?>
 
@@ -173,6 +171,25 @@ $conn->close();
             padding: 20px;
         }
     }
+
+    .btn-voltar {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 20px auto 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-voltar:hover {
+        background-color: #5a6268;
+    }
 </style>
 
 <body>
@@ -182,30 +199,34 @@ $conn->close();
             <form id="formCadastro" method="POST" action="cadastro.php">
                 <div class="input-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" value="<?= $cliente['nome'] ?>" required><br>
+                    <input type="text" id="nome" name="nome" required><br>
                 </div>
 
                 <div class="input-group">
                     <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" value="<?= $cliente['email'] ?>" required><br>
+                    <input type="email" id="email" name="email" required><br>
                 </div>
 
                 <div class="input-group">
                     <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value="<?= $cliente['telefone'] ?>"><br>
+                    <input type="text" id="telefone" name="telefone"><br>
                 </div>
 
                 <div class="input-group">
                     <label for="cep">CEP:</label>
-                    <input type="text" id="cep" name="cep" value="<?= $cliente['cep'] ?>" required><br>
+                    <input type="text" id="cep" name="cep" required><br>
                 </div>
 
                 <div class="input-group">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" name="endereco" value="<?= $cliente['endereco'] ?>" required><br>
+                    <input type="text" id="endereco" name="endereco" required><br>
                 </div>
 
-                <button type="submit" class="btn-submit">Cadastrar</button>
+                <button type="submit" class="btn-submit">Cadastrar</button><br>
+
+                <div style="text-align: center;">
+                    <a href="inicial.php" class="btn-voltar">Voltar para a tela inicial</a>
+                </div><br>
             </form>
         </div>
     </div>
