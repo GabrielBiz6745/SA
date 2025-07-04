@@ -60,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES ('$nome', '$email', '$telefone', '$cep', '$endereco', $usuario_id)";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Cliente cadastrado com sucesso!";
+            $sucesso = true;
+            echo "<script>setTimeout(() => document.querySelector('.mensagem-sucesso').style.display='none', 2000);</script>";
         } else {
             echo "Erro: " . $conn->error;
         }
@@ -76,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     cep='$cep', endereco='$endereco' WHERE id=$usuario_id";
 
         if ($conn->query($sql_update) === TRUE) {
-            echo "Cliente alterado com sucesso!";
+            $sucesso = true;
+            echo "<script>setTimeout(() => document.querySelector('.mensagem-sucesso').style.display='none', 2000);</script>";
         } else {
             echo "Erro: " . $conn->error;
         }
@@ -172,6 +174,13 @@ $conn->close();
         }
     }
 
+    .mensagem-sucesso {
+        text-align: center;
+        margin-bottom: 15px;
+        color: green;
+        font-weight: bold;
+    }
+
     .btn-voltar {
         display: inline-block;
         padding: 10px 20px;
@@ -196,6 +205,11 @@ $conn->close();
     <div class="container">
         <div class="form-container">
             <h2>Cadastro de Cliente</h2>
+            <?php if (isset($sucesso)): ?>
+                <div class="mensagem-sucesso">
+                    <p>Cliente cadastrado com sucesso!</p>
+                </div>
+            <?php endif; ?>
             <form id="formCadastro" method="POST" action="cadastro.php">
                 <div class="input-group">
                     <label for="nome">Nome:</label>
