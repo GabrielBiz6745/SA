@@ -143,7 +143,6 @@ $resultado = $conn->query($sql);
                         <th>Email</th>
                         <th>Telefone</th>
                         <th>CEP</th>
-                        <th>Cidade</th>
                         <th>Endereço</th>
                         <th>Data/Hora</th>
                     </tr>
@@ -156,14 +155,13 @@ $resultado = $conn->query($sql);
                                 <td><?php echo htmlspecialchars($row['email']); ?></td>
                                 <td><?php echo htmlspecialchars($row['telefone']); ?></td>
                                 <td><?php echo htmlspecialchars($row['cep']); ?></td>
-                                <td><?php echo htmlspecialchars($row['cidade']); ?></td>
                                 <td><?php echo htmlspecialchars($row['endereco']); ?></td>
                                 <td><?php echo date('d/m/Y H:i', strtotime($row['data_criacao'])); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7">Nenhum cliente cadastrado.</td>
+                            <td colspan="6">Nenhum cliente cadastrado.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
