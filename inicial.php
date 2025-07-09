@@ -128,7 +128,8 @@ $resultado = $conn->query($sql);
                 <button type="submit">Excluir Cliente</button>
             </form>
 
-            <form class="logout" action="Login.php" method="get">
+            <form class="logout" action="Login.php?deslogar=1" method="get">
+                <input type="hidden" name="deslogar" value="1">
                 <button type="submit">Sair</button>
             </form>
         </div>

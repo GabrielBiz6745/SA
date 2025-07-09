@@ -49,7 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 }
+if (isset($_GET['deslogar'])) {
+    session_destroy();
+    header('Location: Login.php');
+    exit;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
