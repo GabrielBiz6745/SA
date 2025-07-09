@@ -266,6 +266,27 @@ $conn->close();
                 });
             }
         });
+
+        document.getElementById('cep').addEventListener('blur', function() {
+            const cep = this.value.replace(/\D/g, '');
+
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('endereco').value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+                        } else {
+                            alert('CEP não encontrado.');
+                            document.getElementById('endereco').value = '';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar o CEP:', error);
+                        alert('Erro ao buscar o CEP.');
+                    });
+            }
+        });
     </script>
 </body>
 
